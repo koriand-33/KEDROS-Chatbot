@@ -1,0 +1,7 @@
+preguntas = {
+    "¿Cómo cuido una suculenta?": "Es recomendable tenerla en un lugar soleado y agua cada 4 días :).",
+    "¿Qué tipo de plantas manejan?": "Manejamos plantas de interior y exterior, sombra, sol directo y resolana",
+    "¿Cuál es su horario de atención?": "Nuestro horario de atención es de 12:00 a 18:00 hrs.",
+    "¿Dónde se encuentran ubicados?": "Estamos ubicados en la ciudad Nezahualcóyotl, calle Cerezos 19 Colonia La Perla",
+    "¿Qué planta me recomiendas para interior?": "boberto"
+}

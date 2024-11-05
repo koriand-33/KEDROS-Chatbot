@@ -1,0 +1,154 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  background-color: rgb(6, 54, 61);
+  border-bottom: 2px solid #FEF4EFF4;
+}
+
+.logo h1 {
+  font-size: 24px;
+  font-weight: bold;
+  color:#FEF4EFF4;
+}
+
+.nav ul {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+}
+
+.nav ul li a {
+  text-decoration: none;
+  color: #FEF4EFF4;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.icons a {
+  margin-left: 20px;
+  color: #FEF4EFF4;
+  font-size: 18px;
+  text-decoration: none;
+}
+
+.icons a:hover {
+  color: gray;
+}
+
+
+.w-4 {
+  width: 1rem; /* 16px */
+}
+
+.h-4 {
+  height: 1rem; /* 16px */
+}
+
+.footer {
+background-color: #243D3B; /* Color oscuro de fondo */
+padding: 20px 0;
+text-align: center;
+color: #FEF4EFF4; /* Color de texto blanco */
+}
+
+.container {
+display: flex;
+justify-content: space-between;
+align-items: center;
+max-width: 1200px;
+margin: 0 auto;
+padding: 0 20px;
+}
+
+.footer p {
+margin: 0;
+font-size: 14px;
+}
+
+.social-icons {
+display: flex;
+gap: 15px;
+}
+
+.social-icons a {
+color: #fff; /* Color blanco para los íconos */
+font-size: 18px;
+transition: color 0.3s;
+}
+
+.social-icons a:hover {
+color: #d4b7a6; /* Cambia de color al pasar el mouse */
+}
+
+
+/* para listas*/
+
+ol, ul {
+  margin-left: 20px; /* Ajustar el margen para los elementos de lista */
+  padding-left: 20px;
+  list-style-position: outside; /* Asegurar que las viñetas estén fuera del contenido */
+}
+
+ol {
+  list-style-type: decimal; /* Estilo para listas ordenadas (números) */
+}
+
+ul {
+  list-style-type: disc; /* Estilo para listas no ordenadas (viñetas) */
+}
+
+ol[type="I"] {
+  list-style-type: upper-roman; /* Estilo romano para las listas ordenadas */
+}
+
+ol[type="a"] {
+  list-style-type: lower-alpha; /* Estilo con letras minúsculas */
+}
+
+ul[type="square"] {
+  list-style-type: square; /* Estilo con cuadritos */
+}
+
+ul[type="circle"] {
+  list-style-type: circle; /* Estilo con circulitos */
+}
+
+ul[type="disc"] {
+  list-style-type: disc; /* Estilo con discos */
+}
+
+
+
+.typing-effect p {
+  display: inline-block;
+  overflow: hidden;
+  white-space: nowrap;
+  font-family: Arial, sans-serif;
+  font-size: 1.5rem;
+  border-right: 1px solid #333;  /* Color del cursor */
+  animation: typing 3s steps(40, end) forwards, blink-caret 0.75s step-end infinite;
+}
+
+@keyframes typing {
+  from { width: 0; }
+  to { width: 100%; }
+}
+
+@keyframes blink-caret {
+  from, to { border-color: transparent; }
+  50% { border-color: #333; }
+}
+
+
