@@ -1,25 +1,142 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Leafi</title>
-    <link rel="stylesheet" href="styles.css"> <!-- Aquí puedes enlazar tu archivo CSS -->
-
-    
+    <title>Leafi - Tu Asistente de Plantas</title>
+   <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        
+    </style>
 </head>
 <body>
-    <div id="header-placeholder"></div>
+    <div class="container">
+        <div class="header">
+            <h1>🌿 Leafi - Tu Asistente de Plantas</h1>
+        </div>
 
+        <div class="chat-container" id="chatContainer">
+            <!-- Los mensajes se agregarán aquí dinámicamente -->
+        </div>
 
+        <div class="questions-container">
+            <button class="question-btn" onclick="makeQuestion('informacion')">
+                <i class="fas fa-location-dot"></i>
+                Me gustaría saber dónde están ubicados
+            </button>
+            <button class="question-btn" onclick="makeQuestion('plantas')">
+                <i class="fas fa-leaf"></i>
+                Necesito consejos para cuidar mi nueva planta
+            </button>
+            <button class="question-btn" onclick="makeQuestion('regalos')">
+                <i class="fas fa-gift"></i>
+                ¿Qué regalo relacionado con plantas me recomiendas?
+            </button>
+            <button class="question-btn" onclick="makeQuestion('centrosDeMesa')">
+                <i class="fas fa-cannabis"></i>
+                Necesito ideas para un centro de mesa con plantas
+            </button>
+        </div>
 
+        <div class="input-container">
+            <input type="text" id="questionInput" placeholder="Escribe tu pregunta aquí...">
+            <button onclick="sendCustomQuestion()">Enviar</button>
+        </div>
+    </div>
 
-    <div id="footer-placeholder"></div>
+    <script>
+        let responsesData = {
+            "saludos": {
+                "bienvenidas": [
+                    "¡Hola! Soy Leafi, tu asistente virtual especializado en plantas 🌱 Estoy aquí para ayudarte con cualquier duda sobre jardinería y decoración con plantas.",
+                    "¡Qué gusto conocerte! Me llamo Leafi y soy experta en el mundo de las plantas 🌸 ¿En qué puedo ayudarte hoy?",
+                    "¡Bienvenido/a! Soy Leafi, tu compañera en el mundo de la jardinería 🍃 Cuéntame, ¿qué te gustaría saber sobre plantas?"
+                ]
+            },
+            "plantas": [
+                "Para cuidar bien tu planta, primero necesitas identificar su especie. Pero aquí hay algunos consejos generales: riega solo cuando la tierra esté seca al tacto, asegura que tenga buena luz pero no sol directo si es de interior, y revisa sus hojas regularmente para detectar problemas 🌿",
+                "El secreto para mantener feliz a tu planta es observarla. Cada planta es única y te irá 'diciendo' qué necesita: si las hojas están caídas, podría necesitar agua; si están amarillas, podría ser exceso de agua o luz ☘️",
+                "Un buen cuidado básico incluye: riego moderado, buena iluminación, temperatura estable y un poco de amor. ¡No olvides también limpiar sus hojas de vez en cuando! 🌱"
+            ],
+            "regalos": [
+                "¡Un terrario personalizado sería un regalo increíble! Es como un pequeño jardín mágico que requiere poco mantenimiento y queda precioso en cualquier espacio 🎁",
+                "Te recomiendo una suculenta en una maceta decorativa. Son perfectas como regalo porque son resistentes, bonitas y hay muchísimas variedades para elegir 🪴",
+                "¿Qué tal un kit de inicio de jardinería? Podrías incluir algunas semillas fáciles de cultivar, una maceta bonita y herramientas básicas. ¡Es el regalo perfecto para inspirar a alguien a comenzar su jardín! 🌺"
+            ],
+            "centrosDeMesa": [
+                "Una combinación de suculentas de diferentes tamaños y colores en un arreglo bajo sería perfecto. Así no obstaculiza la vista a través de la mesa y dura muchísimo tiempo 🎍",
+                "Podrías crear un centro de mesa con plantas aromáticas como lavanda, romero y hierbabuena. No solo se ve hermoso, ¡también huele delicioso! 🌿",
+                "¿Qué tal un arreglo con mini cactus? Son super tendencia, requieren poco mantenimiento y dan un toque moderno a cualquier mesa 🌵"
+            ],
+            "informacion":["Estamos ubicados en Cerezos 19, Nezahualcóyotl de Lunes a Sábado de 9:00 a 18:00 hrs.",
+            "Nuestra dirección es Cerezos 19, Nezahualcóyotl, Estado de México. ¡Te esperamos!",
+            "Puedes encontrarnos en Cerezos 19, Nezahualcóyotl. ¡Ven a visitarnos! 🌿"
+            ]
+        };
 
-    <script src="header_footer_load.js"></script>
+        // Agregar mensaje de bienvenida al cargar la página
+        window.onload = function() {
 
-    
+            addMessage("¡Hola! Soy Leafi, tu asistente virtual de plantas. ¿En qué puedo ayudarte hoy? 🌱", false);
+        };
+
+        function addMessage(text, isUser) {
+            const chatContainer = document.getElementById('chatContainer');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message ${isUser ? 'user-message' : 'bot-message'}`;
+            messageDiv.textContent = text;
+            chatContainer.appendChild(messageDiv);
+            chatContainer.scrollTop = chatContainer.scrollHeight;
+        }
+
+        function getRandomResponse(category) {
+            const categoryData = responsesData[category];
+            if (Array.isArray(categoryData)) {
+                return categoryData[Math.floor(Math.random() * categoryData.length)];
+            } else {
+                const subCategories = Object.keys(categoryData);
+                const randomSubCategory = subCategories[Math.floor(Math.random() * subCategories.length)];
+                return categoryData[randomSubCategory][Math.floor(Math.random() * categoryData[randomSubCategory].length)];
+            }
+        }
+
+        function makeQuestion(category) {
+            const questions = {
+                'informacion': 'Me gustaría saber dónde se ubican',
+                'plantas': 'Necesito consejos para cuidar mi nueva planta',
+                'regalos': '¿Qué regalo relacionado con plantas me recomiendas?',
+                'centrosDeMesa': 'Necesito ideas para un centro de mesa con plantas'
+            };
+            const questionText = questions[category];
+            addMessage(questionText, true);
+            setTimeout(() => {
+                const response = getRandomResponse(category);
+                addMessage(response, false);
+            }, 500);
+        }
+
+        function sendCustomQuestion() {
+            const input = document.getElementById('questionInput');
+            const question = input.value.trim();
+            if (question) {
+                addMessage(question, true);
+                setTimeout(() => {
+                    const categories = Object.keys(responsesData);
+                    const randomCategory = categories[Math.floor(Math.random() * categories.length)];
+                    const response = getRandomResponse(randomCategory);
+                    addMessage(response, false);
+                }, 500);
+                input.value = '';
+            }
+        }
+
+        // Permitir enviar mensaje con Enter
+        document.getElementById('questionInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                sendCustomQuestion();
+            }
+        });
+    </script>
 </body>
 </html>
